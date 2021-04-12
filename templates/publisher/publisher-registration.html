@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+            </div>
+        </div>
+
+
+        <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="mb-4">
+                        <h3>Sign Up as Publisher</h3>
+                        <p class="mb-4">
+                            Create an Account and Advertise Your Books.
+                        </p>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group first">
+                            <label>Email</label>
+
+                            {{ publisher_reg_form.email|add_class:"form-control"|attr:"autofocus" }}
+                            {% for error in publisher_reg_form.email.errors %}
+                            <li class="small text-danger">
+                                {{ error }}
+                            </li>
+                            {% endfor %}
+                            <p class="small mt-1">{{ publisher_reg_form.email.help_text|safe }}</p>
+                        </div>
+
+
+                        <div class="form-group first">
+                            <label>Name</label>
+
+                            {{ publisher_reg_form.name|add_class:"form-control" }}
+                            {{ publisher_reg_form.name.errors }}
+                        </div>
+
+
+                        <div class="form-group first">
+                            <label>Password</label>
+
+                            {{ publisher_reg_form.password1|add_class:"form-control" }}
+                            {% for error in publisher_reg_form.password1.errors %}
+                            <li class="small text-danger">
+                                {{ error }}
+                            </li>
+                            {% endfor %}
+                            <p class="small mt-1">{{ publisher_reg_form.password1.help_text|safe }}</p>
+                        </div>
+
+
+                        <div class="form-group last mb-4">
+                            <label>Confirm Password</label>
+
+                            {{ publisher_reg_form.password2|add_class:"form-control" }}
+                            {% for error in publisher_reg_form.password2.errors %}
+                            <li class="small text-danger">
+                                {{ error }}
+                            </li>
+                            {% endfor %}
+                            <p class="small mt-1">{{ publisher_reg_form.password2.help_text|safe }}</p>
+                        </div>
+
+                        {{ publisher_reg_form.is_publisher.as_hidden }}
+
+                        <input
+                                type="submit"
+                                value="Sign Up"
+                                class="btn btn-block btn-primary"
+                        />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <p class="text-center mt-5">Already a member? Log in <a href="{% url 'login' %}">here</a></p>
+
+</div>
+
+{% endblock %}
+

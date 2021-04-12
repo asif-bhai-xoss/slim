@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="mb-4">
+                        <h3>Sign Up as Student</h3>
+                        <p class="mb-4">
+                            Create an Account and Find Your Desired Book.
+                        </p>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group first">
+                            <label>Email</label>
+
+                            {{ student_reg_form.email|add_class:"form-control"|attr:"autofocus" }}
+                            {{ student_reg_form.email.errors }}
+                        </div>
+
+
+                        <div class="form-group first">
+                            <label>Name</label>
+
+                            {{ student_reg_form.name|add_class:"form-control" }}
+                            {{ student_reg_form.name.errors }}
+                        </div>
+
+
+                        <div class="form-group first">
+                            <label>Password</label>
+
+                            {{ student_reg_form.password1|add_class:"form-control" }}
+                            {{ student_reg_form.password1.errors }}
+                        </div>
+
+
+                        <div class="form-group last mb-4">
+                            <label>Confirm Password</label>
+
+                            {{ student_reg_form.password2|add_class:"form-control" }}
+                            {{ student_reg_form.password2.errors }}
+                        </div>
+
+                        {{ student_reg_form.is_student.as_hidden }}
+
+                        <input
+                                type="submit"
+                                value="Sign Up"
+                                class="btn btn-block btn-primary"
+                        />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <p class="text-center mt-5">Already a member? Log in <a href="{% url 'login' %}">here</a></p>
+
+</div>
+
+{% endblock %}
+

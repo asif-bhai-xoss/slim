@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-8 mt-4">
+        <div class="card mb-4 mt-4">
+            <div class="card-header">
+                Login to Your Account
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row form-group">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            {{ form.email|attr:"autofocus" }}
+
+                            {% for error in form.email.errors %}
+                            <li class="small text-danger">
+                                {{ error }}
+                            </li>
+                            {% endfor %}
+
+                            <p class="small mt-1">{{ form.email.help_text|safe }}</p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            {{ form.password }}
+
+                            {% for error in form.password.errors %}
+                            <li class="small text-danger">
+                                {{ error }}
+                            </li>
+                            {% endfor %}
+
+                            <p class="small mt-1">{{ form.password.help_text|safe }}</p>
+                        </div>
+                    </div>
+
+
+                    {% if form.non_field_errors %}
+                    <ul class='form-errors'>
+                        {% for error in form.non_field_errors %}
+                        <li class="small text-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <div class="row form-group mb-4">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <input type="submit" value="Login" class="btn px-4 btn-primary form-control text-white">
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var form_fields = document.getElementsByTagName("input")
+
+    form_fields[1].placeholder = 'Email'
+    form_fields[2].placeholder = 'Password'
+
+    for (var i = 1; i < form_fields.length; i++) {
+        form_fields[i].classList += 'form-control';
+    }
+
+
+
+</script>
+
+{% endblock %}
